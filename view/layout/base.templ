@@ -1,0 +1,23 @@
+package layout
+
+import "AGoTTHT/view/components"
+
+// Base includes the HTML boilerplate, HTMX, your static assets, and navigation.
+templ Base(content templ.Component) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<title>Structured App</title>
+			<script src="https://unpkg.com/htmx.org@1.9.10"></script>
+			// Linking to your static folder from image_4dbb04.png
+			<link rel="stylesheet" href="/static/css/styles.css" />
+			<script src="/static/js/static.js"></script>
+		</head>
+		<body class="h-full bg-brand-surface text-brand-light antialiased">
+            @components.Navbar()
+			<main id="main-content">
+				@content
+			</main>
+		</body>
+	</html>
+}

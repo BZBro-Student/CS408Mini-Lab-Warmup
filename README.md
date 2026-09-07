@@ -22,23 +22,9 @@ go install [github.com/a-h/templ](https://github.com/a-h/templ)
 *(Note: to add Templ to your project dependencies, also run `go get github.com/a-h/templ`)*
 
 ### 3. Install Tailwind CSS
-You can install Tailwind CSS either via NPM or by using the standalone executable. The makefile by defualt is set to use the standalone executable
+You can install Tailwind CSS either via NPM or by using the standalone executable. The Makefile by defualt is set to use the standalone executable
 
-#### Option A: Via NPM
-Initialize NPM and install the Tailwind CLI:
-
-```bash
-npm init -y
-npm install -D tailwindcss @tailwindcss/cli
-```
-
-Run the CLI to compile your CSS:
-
-```bash
-npx @tailwindcss/cli -i ./assets/css/input.css -o ./static/css/styles.css
-```
-
-#### Option B: Standalone Executable
+#### Option A: Standalone Executable
 If you prefer to work without Node.js, you can download the standalone executable.
 * **Download:** [Tailwind CSS Releases on GitHub](https://github.com/tailwindlabs/tailwindcss/releases)
 

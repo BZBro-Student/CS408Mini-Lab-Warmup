@@ -1,0 +1,82 @@
+package components
+
+import (
+	"AGoTTHT/internal/api/canvas"
+	"fmt"
+	"strconv"
+)
+
+type courseInfo struct {
+    CourseID string
+    CourseName string 
+    CourseCode string 
+    CurrentScore string
+	CurrentGrade string 
+    TeacherName string 
+    TeacherImage string 
+    TeacherEmail string
+}
+
+func infoParser(course canvas.Course) courseInfo{
+    var CourseID string = strconv.FormatInt(course.ID, 10)
+    var CourseName string = course.Name
+    var CourseCode string = course.CourseCode
+	var ScoreStr string= "N/A"
+	var GradeStr string = "N/A"
+	var TeacherName string= "No Name"
+	var TeacherAvatar string = ""
+	var TeacherEmail string= ""
+	if len(course.Enrollments) > 0 {
+		if course.Enrollments[0].ComputedCurrentScore != nil {
+			ScoreStr = fmt.Sprintf("%.2f%%", *course.Enrollments[0].ComputedCurrentScore)
+		}
+		if course.Enrollments[0].ComputedCurrentGrade != nil {
+			GradeStr = *course.Enrollments[0].ComputedCurrentGrade
+		}
+	}
+
+	if len(course.Teacher) > 0 {
+		TeacherName = course.Teacher[0].DisplayName
+		TeacherAvatar = course.Teacher[0].AvatarImageURL
+		TeacherEmail = course.Teacher[0].Email
+
+	}
+    return courseInfo{CourseID: CourseID, CourseName: CourseName, CourseCode: CourseCode,
+    CurrentScore:ScoreStr, CurrentGrade: GradeStr, TeacherName: TeacherName, TeacherImage: TeacherAvatar ,
+    TeacherEmail: TeacherEmail}
+}
+
+templ Class(value courseInfo) {
+	<div class="bg-brand-dark border-3 border-brand-accent rounded-lg flex flex-col justify-between h-full w-full p-6 text-lg shadow-md  antialiased">
+		<div class="flex flex-row gap-6 p-4">
+			<img src={ value.TeacherImage } class="w-16 h-16 rounded-full object-cover "/>
+			<div class="flex flex-col">
+				if value.TeacherEmail == "" {
+					<p>Teacher: { value.TeacherName }</p>
+				} else {
+					<a href="mailto:" { value.TeacherEmail }>Teacher: { value.TeacherName }</a>
+				}
+				<p><a href={ "https://canvas.instructure.com/courses/" + value.CourseID }>
+                Course Name: { value.CourseName }
+                </a></p>
+				<p class="text-sm">Course Code: { value.CourseCode }</p>
+			</div>
+		</div>
+		<div class="flex flex-row gap-6">
+			<div>
+				<p>Current Score:</p>
+				<p>{ value.CurrentScore }</p>
+			</div>
+			<div>
+				<p>Current Grade:</p>
+				<p>{ value.CurrentGrade }</p>
+			</div>
+		</div>
+	</div>
+}
+
+templ classes(courses []canvas.Course) {
+	for _,value := range courses { 
+		@Class(infoParser(value))
+	}
+}

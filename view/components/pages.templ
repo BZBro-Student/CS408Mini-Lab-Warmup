@@ -1,13 +1,17 @@
 package components
 
+import "AGoTTHT/internal/api/canvas"
+
 templ Home() {
 	<h1>Hello from the well-structured Home Page!</h1>
 }
 
-templ Grades() {
-	<h1>Grades Info Goes Here</h1>
+templ Grades(courses []canvas.Course) {
+	<div class="ml-12 mr-12 mt-16 grid grid-cols-2 gap-4 justify-items-center">
+		@classes(courses)
+	</div>
 }
 
 templ CourseProgress() {
-	<h1>Grades Info Goes Here</h1>
+	<h1>Course Progress Info Goes Here</h1>
 }

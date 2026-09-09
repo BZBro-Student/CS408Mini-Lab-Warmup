@@ -8,7 +8,6 @@ import (
 )
 
 func main() {
-	// 1. Serve the static directory shown in image_4dbb04.png
 	fs := http.FileServer(http.Dir("static"))
 	http.Handle("/static/", http.StripPrefix("/static/", fs))
 

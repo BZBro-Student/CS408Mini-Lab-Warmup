@@ -37,11 +37,11 @@ func Navbar() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = Button("/grades", "grades").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = Button("/grades", "Grades").Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = Button("/progress", "progress").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = Button("/progress", "Progress").Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

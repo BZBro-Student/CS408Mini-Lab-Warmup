@@ -12,6 +12,9 @@ templ Grades(courses []canvas.Course) {
 	</div>
 }
 
-templ CourseProgress() {
-	<h1>Course Progress Info Goes Here</h1>
+templ CourseProgress(courses []canvas.Course, details templ.Component) {
+	@dropdown(courses)
+	<div id="course-details-container">
+		@details
+	</div>
 }

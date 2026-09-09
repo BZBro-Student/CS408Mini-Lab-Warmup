@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 
 	"github.com/a-h/templ"
 	"github.com/joho/godotenv"
@@ -54,5 +55,55 @@ func HandleGrades(w http.ResponseWriter, r *http.Request) {
 
 // HandleProgress serves the progress path
 func HandleProgress(w http.ResponseWriter, r *http.Request) {
-	renderHelper(w, r, components.CourseProgress())
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Println(".env failed to load")
+	}
+	token := os.Getenv("CANVAS_API_TOKEN")
+	domain := os.Getenv("CANVAS_DOMAIN")
+
+	if domain == "" || token == "" {
+		log.Fatal("No value assigned to the environment variables")
+	}
+	client := canvas.NewClient(domain, token)
+	courses, err := client.FetchFavoriteCoursesGrades(r.Context())
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	renderHelper(w, r, components.CourseProgress(courses, components.EmptyClass()))
+}
+
+func HandleCourseLoad(w http.ResponseWriter, r *http.Request) {
+	courseID := r.URL.Query().Get("course_id")
+	if courseID == "" {
+		renderHelper(w, r, components.EmptyClass())
+		return
+	}
+	err := godotenv.Load(".env")
+
+	token := os.Getenv("CANVAS_API_TOKEN")
+	domain := os.Getenv("CANVAS_DOMAIN")
+
+	if domain == "" || token == "" {
+		log.Fatal("No value assigned to the environment variables")
+	}
+
+	client := canvas.NewClient(domain, token)
+
+	courseIDInt, err := strconv.ParseInt(courseID, 10, 64)
+
+	if err != nil {
+		http.Error(w, "Invalid course ID", http.StatusBadRequest)
+		return
+	}
+
+	details, err := client.FetchModules(r.Context(), courseIDInt)
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	renderHelper(w, r, components.ClassProgress(details))
 }

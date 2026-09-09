@@ -1,0 +1,24 @@
+package components
+
+import "AGoTTHT/internal/api/canvas"
+import "strconv"
+
+templ option(value string, name string) {
+    <option value={value}>{name}</option>
+}
+
+templ dropdown(courses []canvas.Course) {
+	<form>
+		<div>
+			<select name="course_id" 
+            hx-get="/progress/course-details" 
+            hx-target="#course-details-container" 
+            hx-swap="innerHTML">
+				<option value="">Select a Class</option>
+                for _,value := range courses {
+                    @option(strconv.FormatInt(value.ID, 10),value.Name)
+                }
+			</select>
+		</div>
+	</form>
+}

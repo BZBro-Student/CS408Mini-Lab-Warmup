@@ -15,6 +15,7 @@ func main() {
 	http.HandleFunc("/", handler.HandleHome)
 	http.HandleFunc("/grades", handler.HandleGrades)
 	http.HandleFunc("/progress", handler.HandleProgress)
+	http.HandleFunc("/progress/course-details", handler.HandleCourseLoad)
 
 	// 3. Start the server
 	fmt.Println("Server running on http://localhost:8080")

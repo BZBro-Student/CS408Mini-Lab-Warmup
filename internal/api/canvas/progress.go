@@ -1,0 +1,70 @@
+package canvas
+
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"io"
+	"net/http"
+	"net/url"
+)
+
+type Module struct {
+	ID          int64        `json:"id"`
+	Name        string       `json:"name"`
+	Position    int          `json:"position"`
+	State       string       `json:"state"` // "locked", "unlocked", "started", "completed"
+	CompletedAt *string      `json:"completed_at,omitempty"`
+	Items       []ModuleItem `json:"items,omitempty"`
+}
+
+type ModuleItem struct {
+	ID                    int64                  `json:"id"`
+	Title                 string                 `json:"title"`
+	Type                  string                 `json:"type"` // e.g., "Assignment", "Quiz", "Page", "File"
+	Position              int                    `json:"position"`
+	HTMLURL               string                 `json:"html_url"`
+	CompletionRequirement *CompletionRequirement `json:"completion_requirement,omitempty"`
+}
+
+type CompletionRequirement struct {
+	Type      string   `json:"type"`
+	MinScore  *float64 `json:"min_score,omitempty"`
+	Completed bool     `json:"completed"`
+}
+
+func (c *Client) FetchModules(ctx context.Context, courseID int64) ([]Module, error) {
+	endpoint := fmt.Sprintf("%s/api/v1/courses/%d/modules", c.domain, courseID)
+	reqURL, err := url.Parse(endpoint)
+
+	if err != nil {
+		return nil, fmt.Errorf("invalid canvas url: %w", err)
+	}
+
+	q := reqURL.Query()
+	q.Add("include[]", "items")
+	q.Add("include[]", "content_details")
+	reqURL.RawQuery = q.Encode()
+
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, reqURL.String(), nil)
+	req.Header.Set("Authorization", "Bearer "+c.token)
+	req.Header.Set("Accept", "application/json")
+
+	resp, err := c.httpClient.Do(req)
+	if err != nil {
+		return nil, fmt.Errorf("failed executing canvas request: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		body, _ := io.ReadAll(resp.Body)
+		return nil, fmt.Errorf("canvas API returned status %d: %s", resp.StatusCode, string(body))
+	}
+
+	var modules []Module
+	if err := json.NewDecoder(resp.Body).Decode(&modules); err != nil {
+		return nil, fmt.Errorf("failed decoding canvas response: %w", err)
+	}
+
+	return modules, nil
+}

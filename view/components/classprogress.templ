@@ -9,7 +9,24 @@ templ EmptyClass() {
 }
 
 templ ClassProgress(details []canvas.Module) {
-	<div id="course-details-container" class="mt-4">
-		<p class="text-gray-500">test string to see if it works</p>
+	<div id="course-details-container" class="mt-6 bg-brand-dark border-3 border-brand-accent rounded-lg flex flex-col justify-between h-full w-full p-6 text-lg shadow-md  antialiased">
+		for _,value := range details {
+			<div>
+				<div>{ value.Name }:</div>
+				for _,items := range value.Items {
+					if (items.Type == "Assignment") {
+						<div class="ml-12">
+							<a href = {items.HTMLURL}>{ items.Title }</a>
+							if (items.CompletionRequirement.Completed) {
+								- Completed &#9989
+							} else {
+								- Not Completed 🥺
+							}
+						</div>
+					}
+				}
+			</div>
+			<hr style="border: none; border-top: 1px solid #ECDFCC; margin: 20px 0;">
+		}
 	</div>
 }

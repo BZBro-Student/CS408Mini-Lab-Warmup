@@ -9,7 +9,7 @@ templ option(value string, name string) {
 
 templ dropdown(courses []canvas.Course) {
 	<form>
-		<div>
+		<div class="bg-brand-dark border-3 border-brand-accent rounded-lg flex flex-col justify-between h-full w-full p-6 text-lg shadow-md  antialiased">
 			<select name="course_id" 
             hx-get="/progress/course-details" 
             hx-target="#course-details-container" 

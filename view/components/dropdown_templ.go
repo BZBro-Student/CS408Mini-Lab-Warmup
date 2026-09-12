@@ -87,7 +87,7 @@ func dropdown(courses []canvas.Course) templ.Component {
 			templ_7745c5c3_Var4 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<form><div><select name=\"course_id\" hx-get=\"/progress/course-details\" hx-target=\"#course-details-container\" hx-swap=\"innerHTML\"><option value=\"\">Select a Class</option> ")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<form><div class=\"bg-brand-dark border-3 border-brand-accent rounded-lg flex flex-col justify-between h-full w-full p-6 text-lg shadow-md antialiased\"><select name=\"course_id\" hx-get=\"/progress/course-details\" hx-target=\"#course-details-container\" hx-swap=\"innerHTML\"><option value=\"\">Select a Class</option> ")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -13,7 +13,7 @@ type Module struct {
 	ID          int64        `json:"id"`
 	Name        string       `json:"name"`
 	Position    int          `json:"position"`
-	State       string       `json:"state"` // "locked", "unlocked", "started", "completed"
+	State       string       `json:"state"`
 	CompletedAt *string      `json:"completed_at,omitempty"`
 	Items       []ModuleItem `json:"items,omitempty"`
 }
@@ -21,7 +21,7 @@ type Module struct {
 type ModuleItem struct {
 	ID                    int64                  `json:"id"`
 	Title                 string                 `json:"title"`
-	Type                  string                 `json:"type"` // e.g., "Assignment", "Quiz", "Page", "File"
+	Type                  string                 `json:"type"`
 	Position              int                    `json:"position"`
 	HTMLURL               string                 `json:"html_url"`
 	CompletionRequirement *CompletionRequirement `json:"completion_requirement,omitempty"`

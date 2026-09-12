@@ -8,9 +8,10 @@ package layout
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+//used to generate the basic structure of the entire site, modify as needed for universal aspects of the website
+
 import "AGoTTHT/view/components"
 
-// Base includes the HTML boilerplate, HTMX, your static assets, and navigation.
 func Base(content templ.Component) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context

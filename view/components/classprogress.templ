@@ -14,19 +14,25 @@ templ ClassProgress(details []canvas.Module) {
 			<div>
 				<div>{ value.Name }:</div>
 				for _,items := range value.Items {
-					if (items.Type == "Assignment") {
+					if (items.Type == "Assignment" || items.Type == "Discussion") {
 						<div class="ml-12">
-							<a href = {items.HTMLURL}>{ items.Title }</a>
-							if (items.CompletionRequirement.Completed) {
-								- Completed &#9989
-							} else {
-								- Not Completed 🥺
-							}
+							if (items.Title != "") {
+								<a href={ items.HTMLURL }>{ items.Title }</a>
+								if items.CompletionRequirement != nil {
+									if items.CompletionRequirement.Completed {
+										- Completed &#9989;
+									} else {
+										- Not Completed 🥺
+									}
+								} else {
+									- No Requirement
+								}
+							} 
 						</div>
 					}
 				}
 			</div>
-			<hr style="border: none; border-top: 1px solid #ECDFCC; margin: 20px 0;">
+			<hr style="border: none; border-top: 1px solid #ECDFCC; margin: 20px 0;"/>
 		}
 	</div>
 }

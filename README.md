@@ -1,62 +1,56 @@
-# AGoTTHT
-**A**nother **Go**, **T**ailwind, **T**empl, **H**TMX **T**emplate
+# Project #: Lab Warmup
 
----
+* Author: Broden Benson
+* Class: CS408
+* Semester: Fall 2026
 
-## Quickstart Guide
+## Overview
 
-Follow these steps to get your development environment up and running.
+Concisely explain what the program does. If this exceeds a couple of
+sentences, you're going too far. Generally you should be pulling this
+right from the project specification. I don't want you to just cut and
+paste, but paraphrase what is stated in the project specification.
 
-### 1. Install Go 
-* **Download & Learn:** [go.dev/learn](https://go.dev/learn/)
-initialize your Go module:
-```bash
-go mod init <directory>
-```
+## Reflection
 
-### 2. Install Templ
-Install the Templ CLI tool
-```bash
-go install [github.com/a-h/templ](https://github.com/a-h/templ)
-```
-*(Note: to add Templ to your project dependencies, also run `go get github.com/a-h/templ`)*
+Write a two paragraph reflection describing your experience with this
+project.  Talk about what worked well and what was challenging.  
+Did you run into an issue that took some time to figure out?  
+Tell us about it. What did you enjoy, what was less desirable? Feel
+free to add other items (within the two paragraph limit).
 
-### 3. Install Tailwind CSS
-You can install Tailwind CSS either via NPM or by using the standalone executable. The Makefile by defualt is set to use the standalone executable
+## Compiling and Using
 
-#### Option A: Standalone Executable
-If you prefer to work without Node.js, you can download the standalone executable.
-* **Download:** [Tailwind CSS Releases on GitHub](https://github.com/tailwindlabs/tailwindcss/releases)
+This section should tell the user how to compile your code.  It is
+also appropriate to instruct the user how to use your code. Does your
+program require user input? If so, what does your user need to know
+about it to use it as quickly as possible?
 
-After downloading the correct executable for your operating system, rename it and move it to your binaries folder (Linux/macOS example), this can and should be skipped if already done before:
+## Results
 
-```bash
-sudo mv tailwindcss /usr/local/bin/
-```
+This section presents timing and other results of any experiments that
+you were asked to perform as part of the project.
 
-### 4. Live Reloading with Air
-To get live reloading for your Go server, you can use [Air](https://github.com/air-verse/air).
+## Sources used
 
-Install Air globally:
+If you used any sources outside of the lecture notes, class lab files,
+or text book you need to list them here. If you looked something up on
+stackoverflow.com and fail to cite it in this section it will be
+considered plagiarism and be dealt with accordingly. Be sure to include any 
+usage of Generative AI, and why you used it or what you got from it.  
 
-```bash
-go install [github.com/air-verse/air@latest](https://github.com/air-verse/air@latest)
-```
+Finally, remove these instructions from your README.md after you are finished!
 
-Initialize Air in your project directory (this creates a `.air.toml` config file):
+----------
 
-```bash
-air init
-```
+## Notes
 
-Start your development server with live reloading:
+* This README.md template is using Markdown. Here is some help on using Markdown:
+  [markdown cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
 
-```bash
-air
-```
 
-Assuming all went well for you the command:
-```bash
-make dev
-```
-should spin your localhost to life on :8080
+* Markdown can be edited and viewed natively in most IDEs such as Eclipse and VS Code. Just toggle
+  between the Markdown source and preview tabs.
+
+* To preview your README.md output online, you can copy your file contents to a Markdown editor/previewer
+  such as [https://stackedit.io/editor](https://stackedit.io/editor).

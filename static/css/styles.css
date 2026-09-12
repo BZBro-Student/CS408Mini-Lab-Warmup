@@ -200,6 +200,9 @@
   .ml-12 {
     margin-left: calc(var(--spacing) * 12);
   }
+  .contents {
+    display: contents;
+  }
   .flex {
     display: flex;
   }

@@ -46,3 +46,27 @@ make run
 [university domain]/api/v1/users/self/favorites/courses
 
 [university domain]/api/v1/courses/[course ID]/modules
+
+## Reflection
+
+Full Stack is hard. Especially using tools that I have never used in the past, the amount of docs reading
+I did could probably encompass all of the docs reading I've done in the first 2 years of my CS degree all 
+condensed over the long labor day weekend. Go is new to me with a very basic introduction coming from my
+programming languages class, but it is super cool (C without the headache of C). Templ, the templating system
+I used is also incredibly cool since instead of straight up serving the HTML page to the client it compiles to native Go 
+code can be used to selectively render parts of the site at any given time. HTMX in combination with this
+allows for super snappy and lightweight interactivity without needing to get JavaScript involved. All of this
+comes with a steep learning curve, but I feel as though it gave me a pretty good understanding of the structure 
+of the stack. 
+
+On top of learning more about my stack I also got to get some hands on API usage experience which is something I 
+have not had to use before. The code is a little dense so I used some AI generated boilerplate but the structure 
+between the requests look to be pretty similar so I think I could adapt the code I have to work with other APIs I 
+may use in the future. One thing that was hard was pulling my return data into my templ templates. Templ code variables
+are immutable anything passed in stays that way so any data that needs parsed or modified has to be done before being handed
+to a temple method. Learning this will be useful undoubtedly.
+
+If I had more time my visual presentation would be something I work more on. UI design is not my strong-suit especially 
+with a new system, maybe some more graphical flare in the progress section, but I worry that may be too much? I also would
+want to work on overall file structure. I made a basic goth template from projects I had seen so a lot of files are empty
+vestigial structure.

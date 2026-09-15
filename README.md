@@ -40,3 +40,9 @@ make dev
 For a standard run use the command:
 
 make run
+
+## API Endpoints Used
+
+[university domain]/api/v1/users/self/favorites/courses
+
+[university domain]/api/v1/courses/[course ID]/modules
